@@ -20,13 +20,19 @@
       guHttpBase="<%= GitHosting.my_root_url %>";
       guHttpProto="<%= project.repository.extra[:git_http].to_s == "2" ? "http" : "https" %>";
 
-      if (!(window.Event === undefined) && !(Event.observe === undefined)) {
-        Event.observe(window,"load", setGitUrlOnload);
-      } else {
-         window.onload = setGitUrlOnload;
-      }
+     
+      
+      window.onload = setGitUrlOnload;
+      
+      
+      /*if (!(window.Event === undefined) && !(Event.observe === undefined)) {
+				Event.observe(window,"load", setGitUrlOnload);
+			} else {
+			       window.onload = setGitUrlOnload;
+			}*/
 
-      ZeroClipboard.setMoviePath('<%= GitHostingHelper.plugin_asset_link('ZeroClipboard.swf') %>');
+      ZeroClipboard.setDefaults({ moviePath: "<%= GitHostingHelper.plugin_asset_link('ZeroClipboard.swf') %>" });
+      //ZeroClipboard.setMoviePath('<%= GitHostingHelper.plugin_asset_link('ZeroClipboard.swf') %>');
       setZeroClipboardInputSource("git_url_text");
     </script>
   <% end %>
@@ -40,7 +46,7 @@
       <% end %>
       <div id="git_url_box">
         <div id="clipboard_container" title="<%= l(:label_copy_to_clipboard) %>" style="display: none;">
-          <div id="clipboard_button"><%= image_tag 'paste.png', :plugin => 'redmine_git_hosting' %></div>
+          <div id="clipboard_button" style="cursor: pointer; cursor: hand;"><%= image_tag 'paste.png', :plugin => 'redmine_git_hosting' %></div>
         </div>
         <ul id="git_url_list" >
           <% if !User.current.anonymous? %>
@@ -59,3 +65,6 @@
     </div>
   <% end %>
 <% end %>
+
+<!--<h4>Debug Console:</h4>-->
+<!--<div id="d_debug"></div>-->
